@@ -1,0 +1,20 @@
+body {
+  background: #f2f2f2;
+  font-family: "Montserrat";
+  border-top: 30px solid #303F9F; }
+
+
+
+
+header{
+    color: #ffffff;
+    position: relative;
+    vertical-align: middle;
+    font-family: "Montserrat Alternates";
+    text-align: center;
+}
+
+
+.color{
+    background:  #303F9F;
+}

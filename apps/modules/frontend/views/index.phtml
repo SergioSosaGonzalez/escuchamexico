@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <link rel="stylesheet" href="<?=$this->url->get('front/css/bootstrap.min.css')?>">
+      <link rel="stylesheet" href="<?=$this->url->get('front/css/ind.css')?>">
+      <link rel="stylesheet" href="<?=$this->url->get('front/css/animate.min.css')?>">
+    <title>Luz de amor</title>
+  </head>
+  <header class="container-fluid bluebackground">
+      <div class="row">
+          <div class="col-md-2 hidden-xs hidden-sm">
+              <a href="facebook.com">
+                  <h4 class="white">
+                      <img src="<?=$this->url->get('front/img/fb.png')?>" style="width:20%"alt="facebook"> Facebook
+                  </h4>
+              </a>
+          </div>
+          <div class="col-md-2 hidden-xs hidden-sm">
+              <a href="twitter.com">
+                  <h4 class="white">
+                      <img src="<?=$this->url->get('front/img/tw.png')?>" style="width:20%"alt="twitter"> Twitter
+                  </h4>
+              </a>
+          </div>
+          <div class="col-md-4 hidden-xs hidden-sm">
+              <p></p>
+              <h4 class="white">
+
+              </h4>
+          </div>
+      </div>
+  </header>
+  <body>
+  <div class="container-fluid">
+      <div class="row well">
+          <div class="col-md-3">
+              <a href="/"><h1 class="n60 black"><span class="blue">Dr</span><span>Patricio</span></h1><a/>
+          </div>
+          <div class="col-md-3">
+              <a href="/acerca-de">
+                  <h1 style="cursor:help;" data-toggle="tooltip" title="Click aqui para saber más">¿Quien es el Dr Patricio?</h1>
+              </a>
+          </div>
+          <div class="col-md-2">
+              <h1>Llamanos:</h1>
+              <h5 class="grey"><span class="glyphicon glyphicon-earphone blue" style="margin-right:1em"></span>555-123-23132</h5>
+          </div>
+          <div class="col-md-3">
+              <h1>Horarios de Atencion:</h1>
+              <h5 class="grey"><span class="glyphicon glyphicon-time blue" style="margin-right:1em"></span>Lunes-Viernes:9am-6pm; Sabado:10pm</h5>
+          </div>
+          <div class="col-md-1">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="<?=$this->url->get('front/img/3 (2).png')?>" style="width:100%" alt="cuenta"></a>
+                  <h5 class="grey" style="text-align: center;">
+                      Iniciar Sesion
+                  </h5>
+              <ul id="login-dp" class="dropdown-menu dropdown-menu-right">
+                  <li>
+                      <div class="row">
+                          <div class="col-md-12">
+                                  <h2 style="text-align:center">Iniciar Sesión</h2>
+                                  <form class="form" role="form" method="post" action="validar_usuario.php" accept-charset="UTF-8" id="login-nav">
+                                      <div class="form-group">
+                                          <label class="sr-only" for="exampleInputEmail2">Folio</label>
+                                          <input type="number" class="form-control" id="folio" name="folio" placeholder="Folio" required>
+                                      </div>
+                                      <div class="form-group">
+                                          <label class="sr-only" for="exampleInputPassword2">Contraseña</label>
+                                          <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña" required>
+
+                                          <div class="form-group">
+                                              <button type="submit" name="login" class="btn btn-primary btn-block">Iniciar</button>
+                                          </div>
+                                  </form>
+                          </div>
+                      </div>
+                  </li>
+              </ul>
+          </div>
+      </div>
+      <!-- ---------------Modal Cambio de Contraseña--------------- -->
+      <div class="modal fade" id="Cambio" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+          <div class="modal-dialog modal-sm" role="document">
+              <div class="modal-content">
+                  <div class="modal-header modal-header-primary">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="gridSystemModalLabel">Cambiar Contraseña</h4>
+                  </div>
+                  <div class="modal-body">
+                      <div class="row">
+                          <div class="col-md-12">
+                              <form class="form-horizontal" method="post" action="cambio.php?idpaciente=<?php echo $idpaciente;?>" name="login_form">
+                                  <div class="form-group row">
+                                      <div class="col-md-12">
+                                          <input class="form-control" type="text" placeholder="Contraseña Actual " name="oldpass" id="oldpass">
+                                      </div>
+                                  </div>
+                                  <div class="form-group row">
+                                      <div class="col-md-12">
+                                          <input class="form-control" type="password" placeholder="Nueva Contraseña" name="newpass" id="newpass">
+                                      </div>
+                                  </div>
+                                  <div class="form-group row">
+                                      <div class="col-md-12">
+                                          <input class="form-control" type="password" placeholder="Repite la contraseña Nueva" name="newpass2" id="newpass2">
+                                      </div>
+                                  </div>
+
+                          </div>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                      <input name="cambio" class="btn btn-primary" type="submit" value="Enviar"></form>
+                  </div>
+              </div>
+              <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+      <?= $this->getContent() ?>
+
+
+  <script src="<?=$this->url->get('front/js/jquery.min.js')?>"></script>
+  <script src="<?=$this->url->get('front/js/bootstrap.min.js')?>"></script>
+  <script src="<?=$this->url->get('front/js/carouselanimate.js')?>"></script>
+  <script>
+      $(document).ready(function() {
+          $('[data-toggle="popover"]').popover();
+      });
+  </script>
+  </body>
+</html>

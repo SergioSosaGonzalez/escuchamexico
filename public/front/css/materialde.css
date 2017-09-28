@@ -1,0 +1,44 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.header {
+    position: relative;
+    height: 150px;
+    z-index: 3;
+}
+
+.colornaranja {
+    background-color: rgb(255, 87, 34);
+}
+
+.colorindigo {
+    background-color: rgb(63, 81, 181);
+}
+
+header h1 {
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    padding-left: 35px;
+}
+
+.pages {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 4;
+    padding: 0;
+    overflow: auto;
+}
+
+.circulo {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 120px;
+}
+
+.left {
+    float: right;
+}
