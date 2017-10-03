@@ -47,6 +47,20 @@ class Psicologo extends \Phalcon\Mvc\Model
     protected $num_celular;
 
     /**
+     *
+     * @var string
+     * @Column(type="string", length=500, nullable=true)
+     */
+    protected $image_cedula;
+
+    /**
+     *
+     * @var string
+     * @Column(type="string", nullable=true)
+     */
+    protected $status;
+
+    /**
      * Method to set the value of field id_psicologo
      *
      * @param string $id_psicologo
@@ -125,6 +139,32 @@ class Psicologo extends \Phalcon\Mvc\Model
     }
 
     /**
+     * Method to set the value of field image_cedula
+     *
+     * @param string $image_cedula
+     * @return $this
+     */
+    public function setImageCedula($image_cedula)
+    {
+        $this->image_cedula = $image_cedula;
+
+        return $this;
+    }
+
+    /**
+     * Method to set the value of field status
+     *
+     * @param string $status
+     * @return $this
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
      * Returns the value of field id_psicologo
      *
      * @return string
@@ -182,6 +222,26 @@ class Psicologo extends \Phalcon\Mvc\Model
     public function getNumCelular()
     {
         return $this->num_celular;
+    }
+
+    /**
+     * Returns the value of field image_cedula
+     *
+     * @return string
+     */
+    public function getImageCedula()
+    {
+        return $this->image_cedula;
+    }
+
+    /**
+     * Returns the value of field status
+     *
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 
     /**

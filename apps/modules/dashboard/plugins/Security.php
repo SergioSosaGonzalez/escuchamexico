@@ -68,7 +68,7 @@ class Security extends Plugin {
                 $acl->addResource(new \Phalcon\Acl\Resource($resource),$actions);
             };
             $publicResources = array(
-                "login"=>array('index',"logout","session"),
+                "login"=>array('index',"logout","session","ajax"),
             );
             foreach($publicResources as $resource => $actions){
                 $acl->addResource(new \Phalcon\Acl\Resource($resource),$actions);

@@ -39,6 +39,30 @@ $di->set('router', function(){
         'action' => 'informacion',
     ));
 
+    $router->add("/uploadimage", array(
+        'module'=>'frontend',
+        'controller' => 'index',
+        'action' => 'uploadimage',
+    ));
+
+
+    $router->add("/deleteimage", array(
+        'module'=>'frontend',
+        'controller' => 'index',
+        'action' => 'delete',
+    ));
+
+    $router->add("/psicologos-registro", array(
+        'module'=>'frontend',
+        'controller' => 'index',
+        'action' => 'formulariopsicologo',
+    ));
+
+    $router->add("/ajax", array(
+        'module'=>'dashboard',
+        'controller' => 'login',
+        'action' => 'ajax',
+    ));
  /* inscription */
     $router->add("/inscription", array(
         'module'=>'dashboard',
@@ -54,6 +78,24 @@ $di->set('router', function(){
         'module'=>'dashboard',
         'controller' => 'login',
         'action' => 'logout',
+    ));
+    $router->add("/dashboard",array(
+        'module'=>'dashboard',
+        'controller' => 'index',
+        'action' => 'index',
+    ));
+    $router->add('/([0-9-a-zA-Z\-]+)/([0-9-a-zA-Z\-]+)', array(
+        'module'=>'dashboard',
+        'controller'=>'1',
+        'action'=>'2'
+    ))->setName("controllers")->convert('action', function($action) {
+        return \Phalcon\Text::lower(\Phalcon\Text::camelize($action));
+    });
+
+    $router->add("/psicologos-registro/guardarpsicologos", array(
+        'module'=>'frontend',
+        'controller' => 'index',
+        'action' => 'guardarpsicologos',
     ));
 
     return $router;

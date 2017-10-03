@@ -1,236 +1,102 @@
 <!DOCTYPE html>
-<html lang="es-MX">
+<html>
 <head>
-    <!-- META SECTION -->
-    <?php $auth = $this->session->get("auth");?>
-    <title>UMAEE - Control de Inscripciones</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <!--Meta Google-->
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
-    <meta name="robots" content="nofollow">
-    <meta name="googlebot" content="nofollow">
-    <meta name="google" content="notranslate" />
-    <meta name="author" content="Chontal Developers" />
-    <meta name="copyright" content="2014 c-develpers.com Todos los derechos reservados." />
-    <meta name="application-name" content="Control de inscripciones" />
-    <link rel="author" href="https://plus.google.com/u/0/101316577346995540804/posts"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,500,600,700&subset=latin,latin-ext">
+    <meta charset="utf-8">
+    <title>Luz de amor</title>
     <!-- CSS INCLUDE -->
-    
-        <?= $this->assets->outputCss('CssIndex') ?>
-    
-    <?php $cssPlugins = $this->assets->collection('cssPlugins'); ?>
-    <?php if (!empty($cssPlugins)) { ?>
-        <?=$this->assets->outputCss('cssPlugins'); ?>
-    <?php } ?>
-    <!-- EOF CSS INCLUDE -->
+    <link href="<?=$this->url->get('dash/css/bootstrap.css')?>" rel="stylesheet" type="text/css" >
+    <link href="<?=$this->url->get('dash/css/font-awesome.css')?>" rel="stylesheet" type="text/css" >
+    <link href="<?=$this->url->get('dash/css/sweet-alert.css')?>" rel="stylesheet" type="text/css" >
+    <link href="<?=$this->url->get('dash/css/material-design-iconic-font.min.css')?>" rel="stylesheet" type="text/css" >
+    <link href="<?=$this->url->get('dash/css/normalize.css')?>" rel="stylesheet" type="text/css" >
+    <link href="<?=$this->url->get('dash/css/jquery.mCustomScrollbar.css')?>" rel="stylesheet" type="text/css" >
+    <link href="<?=$this->url->get('dash/css/style.css')?>" rel="stylesheet" type="text/css" >
+
+
 </head>
 <body>
-<!-- PAGE LOADING FRAME -->
-<!--div class="page-loading-frame">
-    <div class="page-loading-loader">
-        <img src="<?= $this->url->get('dash/img/loaders/page-loader.gif') ?>"/>
-    </div>
-</div-->
-<!-- END PAGE LOADING FRAME -->
-  <!-- START PAGE CONTAINER -->
-    <div class="page-container">
-
-        <!-- START PAGE SIDEBAR -->
-        <div class="page-sidebar mCustomScrollbar _mCS_1 mCS-autoHide page-sidebar-fixed scroll">
-            <!-- START X-NAVIGATION -->
-            <ul class="x-navigation x-navigation-custom">
-                <li class="xn-logo" style="background-color: #fff;">
-                    <a href="<?= $this->url->get('inscription') ?>">UMAEE</a>
-                    <a href="#" class="x-navigation-control"></a>
-                </li>
-                <li class="xn-profile">
-                    <a href="<?= $this->url->get('inscription/user/profile') ?>" class="profile-mini">
-                        <img src="/dash/assets/images/users/thumbnail/<?= $auth['photo'] ?>" alt="Alexander"/>
-                    </a>
-                    <div class="profile">
-                        <div class="profile-image">
-                            <img src="/dash/assets/images/users/thumbnail/<?= $auth['photo'] ?>" alt="Alexander"/>
-                        </div>
-                        <div class="profile-data">
-                            <div class="profile-data-name"><?= $auth['username'] ?></div>
-                        </div>
-                        <div class="profile-controls">
-                            <a href="<?= $this->url->get('inscription/user/profile') ?>" class="profile-control-left" title="Editar perfil"><span class="fa fa-info"></span></a>
-                            <a href="<?= $this->url->get('inscription') ?>" class="profile-control-right" title="Mensajes de post"><span class="fa fa-envelope"></span></a>
-                        </div>
-                    </div>
-                </li>
-                <li class="xn-title">Navegación</li>
-                <li class="<?php echo $this->router->getControllerName()=='index'?"active":""?>">
-                    <a href="<?= $this->url->get('inscription') ?>"><span class="fa fa-desktop"></span> <span class="xn-text">Menú principal</span></a>
-                </li>
-                <?php if ($auth['rol'] == 'ADMIN') { ?>
-                <li class="xn-openable <?php echo $this->router->getControllerName()=='reports'?"active":""?>">
-                    <a href="#"><span class="fa fa-calendar"></span> <span class="xn-text">Calendario de reportes</span></a>
-                    <ul>
-                        <li class="<?php echo $this->router->getControllerName()=='reports'?"active":""?>"><a href="<?= $this->url->get('inscription/reports') ?>"><span class="fa fa-list-ul"></span> Reportes generales</a></li>
-                        <!--li class="<?php echo $this->router->getControllerName()=='reports-school'?"active":""?>"><a href="<?= $this->url->get('inscription/reports-schools') ?>"><span class="fa fa-list-alt"></span> Reportes escuelas</a></li-->
-                    </ul>
-
-                </li>
-                <?php } ?>
-                <?php if ($auth['rol'] == 'ADMIN' || $auth['rol'] == 'COORDINATOR') { ?>
-                <li class="xn-openable <?php echo $this->router->getControllerName()=='mail' || $this->router->getControllerName()=='client'?"active":""?>">
-                    <a href="#"><span class="fa fa-bar-chart-o"></span> <span class="xn-text">Procesos</span></a>
-                    <ul>
-                        <li class="xn-openable <?php echo $this->router->getControllerName()=='client'?"active":""?>">
-                            <a href="#"><span class="fa fa-child"></span><span class="xn-text">Inscripciones</span></a>
-                            <ul>
-                                <li class="<?php echo $this->router->getControllerName()=='client' && $this->router->getActionName()=='new'?"active":""?>"><a href="<?= $this->url->get('inscription/client/new') ?>"><span class="fa fa-smile-o"></span> Nueva</a></li>
-                                <li class="<?php echo $this->router->getControllerName()=='client' && ($this->router->getActionName()=='index' || $this->router->getActionName()=='control')?"active":""?>"><a href="<?= $this->url->get('inscription/clients') ?>"><span class="fa fa-users"></span> Proceso</a></li>
-                                <li class="<?php echo $this->router->getControllerName()=='client' && ($this->router->getActionName()=='internet' || $this->router->getActionName()=='control')?"active":""?>"><a href="<?= $this->url->get('inscription/client/internet') ?>"><span class="fa fa-cloud"></span> Proceso-Internet</a></li>
-                                <li class="<?php echo $this->router->getControllerName()=='client' && $this->router->getActionName()=='signedup'?"active":""?>"><a href="<?= $this->url->get('inscription/client/signed-up') ?>"><span class="fa fa-user"></span> Inscritos</a></li>
-                                <li class="<?php echo $this->router->getControllerName()=='client' && $this->router->getActionName()=='inactive'?"active":""?>"><a href="<?= $this->url->get('inscription/client/inactive') ?>"><span class="fa fa-user-times"></span> Perdidos</a></li>
-                            </ul>
-                        </li>
-                        <!--li class="xn-openable <?php echo $this->router->getControllerName()=='mail'?"active":""?>">
-                            <a href="#"><span class="fa fa-envelope"></span> <span class="xn-text">E-Mail</span></a>
-                            <ul>
-                                <li class="<?php echo $this->router->getControllerName()=='mail' && $this->router->getActionName()=='send'?"active":""?>"><a href="<?= $this->url->get('inscription/mail/send') ?>"><span class="fa fa-send-o"></span> Enviar email</a></li>
-                            </ul>
-                        </li-->
-                    </ul>
-                </li>
-                <?php } ?>
-                <?php if ($auth['rol'] == 'ADMIN') { ?>
-                <li class="xn-openable <?php echo $this->router->getControllerName()=='user'?"active":""?>">
-                    <a href="#"><span class="fa fa-users"></span> <span class="xn-text">Ejecutivos</span></a>
-                    <ul>
-                        <li class="<?php echo $this->router->getControllerName()=='user' && $this->router->getActionName()=='newuser'?"active":""?>">
-                            <a href="<?= $this->url->get('inscription/user/new-user') ?>"><span class="fa fa-user-plus"></span> Nuevo ejecutivo</a>
-                        </li>
-                        <li class="<?php echo $this->router->getActionName()=='index' && $this->router->getControllerName()=='user'?"active":""?>">
-                            <a href="<?= $this->url->get('inscription/users') ?>"><span class="fa fa-user"></span> Activos</a>
-                        </li>
-                        <li class="<?php echo $this->router->getActionName()=='inactive' && $this->router->getControllerName()=='user'?"active":""?>">
-                            <a href="<?= $this->url->get('inscription/user/inactive') ?>"><span class="fa fa-user-secret"></span> Inactivos</a>
-                        </li>
-                    </ul>
-                </li>
-                <?php } ?>
-            </ul>
-            <!-- END X-NAVIGATION -->
+<div class="navbar-lateral full-reset">
+    <div class="visible-xs font-movile-menu mobile-menu-button"></div>
+    <div class="full-reset container-menu-movile custom-scroll-containers">
+        <div class="logo full-reset all-tittles">
+            <i class="visible-xs zmdi zmdi-close pull-left mobile-menu-button" style="line-height: 55px; cursor: pointer; padding: 0 10px; margin-left: 7px;"></i>
+            Luz de amor
         </div>
-        <!-- END PAGE SIDEBAR -->
-
-
-        <!-- PAGE CONTENT -->
-        <div class="page-content">
-
-            <!-- START X-NAVIGATION VERTICAL -->
-            <ul class="x-navigation x-navigation-horizontal x-navigation-panel">
-                <!-- TOGGLE NAVIGATION -->
-                <li class="xn-icon-button">
-                    <a href="#" class="x-navigation-minimize"><span class="fa fa-dedent"></span></a>
-                </li>
-                <!-- END TOGGLE NAVIGATION -->
-                <!-- SEARCH -->
-                <li class="xn-search">
-                    <form role="form">
-                        <input type="text" name="search" placeholder="Buscar"/>
-                    </form>
-                </li>
-                <!-- END SEARCH -->
-                <!-- POWER OFF -->
-                <li class="xn-icon-button pull-right last">
-                    <a href="#"><span class="fa fa-power-off"></span></a>
-                    <ul class="xn-drop-left animated zoomIn">
-                        <li><a href="<?= $this->url->get('') ?>"><span class="fa fa-lock"></span>Bloquear</a></li>
-                        <li><a href="#" class="mb-control" data-box="#mb-signout"><span class="fa fa-sign-out"></span>Cerrar sesión</a></li>
+        <div class="full-reset" style="background-color:#2B3D51; padding: 10px 0; color:#fff;">
+            <figure>
+                <img src="/dash/img/LUZ_BAJA.png" alt="Biblioteca" class="img-responsive center-box" style="width:55%;">
+            </figure>
+            <p class="text-center" style="padding-top: 15px;">Sistema de gestion</p>
+        </div>
+        <div class="full-reset nav-lateral-list-menu">
+            <ul class="list-unstyled">
+                <li><a href="/dashboard"><i class="zmdi zmdi-home zmdi-hc-fw"></i>&nbsp;&nbsp; Inicio</a></li>
+                <li>
+                    <div class="dropdown-menu-button"><i class="fa fa-user-md"></i>&nbsp;&nbsp; Psicologos <i class="zmdi zmdi-chevron-down pull-right zmdi-hc-fw"></i></div>
+                    <ul class="list-unstyled">
+                        <li><a href="institution.html"><i class="fa fa-list"></i>&nbsp;&nbsp; Lista de candidatos</a></li>
+                        <li><a href="provider.html"><i class="fa fa-thumbs-up" ></i>&nbsp;&nbsp; Activos</a></li>
+                        <li><a href="category.html"><i class="fa fa-thumbs-down"></i>&nbsp;&nbsp; Inactivos</a></li>
                     </ul>
                 </li>
-                <!-- END POWER OFF -->
-            </ul>
-            <!-- END X-NAVIGATION VERTICAL -->
-            <?= $this->getContent() ?>
-        </div>
-        <!-- END PAGE CONTENT -->
-
-    </div>
-    <!-- END PAGE CONTAINER -->
-
-    <!-- MESSAGE BOX-->
-    <div class="message-box animated fadeIn" data-sound="alert" id="mb-signout">
-        <div class="mb-container">
-            <div class="mb-middle">
-                <div class="mb-title"><span class="fa fa-sign-out"></span> Cerrar <strong>Sesión</strong> ?</div>
-                <div class="mb-content">
-                    <p>¿Estas seguro de cerrar esta sesión?</p>
-                    <p>Pulse No si desea continuar con el trabajo. Pulse Sí para cerrar la sesión del usuario actual.</p>
-                </div>
-                <div class="mb-footer">
-                    <div class="pull-right">
-                        <a href="<?= $this->url->get('logout') ?>" class="btn btn-success btn-lg">Yes</a>
-                        <button class="btn btn-default btn-lg mb-control-close">No</button>
-                    </div>
-                </div>
-            </div>
+                <li>
+                    <div class="dropdown-menu-button"><i class="fa fa-user"></i>&nbsp;&nbsp; Pacientes <i class="zmdi zmdi-chevron-down pull-right zmdi-hc-fw"></i></div>
+                    <ul class="list-unstyled">
+                        <li><a href="admin.html"><i class="zmdi zmdi-face zmdi-hc-fw"></i>&nbsp;&nbsp;Citas</a></li>
+                        <li><a href="teacher.html"><i class="zmdi zmdi-male-alt zmdi-hc-fw"></i>&nbsp;&nbsp; Personas pendientes</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="dropdown-menu-button"><i class="fa fa-comments"></i>&nbsp;&nbsp; Comentarios <i class="zmdi zmdi-chevron-down pull-right zmdi-hc-fw"></i></div>
+                    <ul class="list-unstyled">
+                        <li><a href="book.html"><i class="fa fa-thumbs-up"></i>&nbsp;&nbsp;Autorizados</a></li>
+                        <li><a href="catalog.html"><i class="fa fa-thumbs-down" ></i>&nbsp;&nbsp; Rechazados</a></li>
+                    </ul>
+                </li>
+             </ul>
         </div>
     </div>
-    <!-- END MESSAGE BOX-->
-    
-        <?= $this->assets->outputJs('JsIndex') ?>
-    
-    <!-- Validation form -->
-    <?php $jsValidation = $this->assets->collection('jsValidation'); ?>
-    <?php if (!empty($jsValidation)) { ?>
-        <?=$this->assets->outputJs('jsValidation'); ?>
-    <?php } ?>
-    <!-- End Validation form -->
-    
-    <!-- Datatables -->
-    <?php $dataTable = $this->assets->collection('jsDataTable');
-        if (!empty($dataTable)) {echo $this->assets->outputJs('jsDataTable');}
-    ?>
-    <!-- END CORE TEMPLATE JS - END -->
-    
-    <!-- CORE TEMPLATE JS - START -->
-    <?php $plugins = $this->assets->collection('jsPlugins');
-        if (!empty($plugins)) {echo $this->assets->outputJs('jsPlugins');}
-    ?>
+</div>
+<div class="content-page-container full-reset custom-scroll-containers">
+    <nav class="navbar-user-top full-reset">
+        <ul class="list-unstyled full-reset">
+            <figure>
+                <img src="/dash/img/user01.png" alt="user-picture" class="img-responsive img-circle center-box">
+            </figure>
+            <li style="color:#fff; cursor:default;">
+                <span class="all-tittles">Admin Name</span>
+            </li>
+            <li  class="tooltips-general exit-system-button" data-href="/dashboard/logout" data-placement="bottom" title="Salir del sistema">
+                <i class="zmdi zmdi-power"></i>
+            </li>
+            <li  class="tooltips-general search-book-button" data-href="searchbook.html" data-placement="bottom" title="Buscar libro">
+                <i class="zmdi zmdi-search"></i>
+            </li>
+            <li  class="tooltips-general btn-help" data-placement="bottom" title="Ayuda">
+                <i class="zmdi zmdi-help-outline zmdi-hc-fw"></i>
+            </li>
+            <li class="mobile-menu-button visible-xs" style="float: left !important;">
+                <i class="zmdi zmdi-menu"></i>
+            </li>
+        </ul>
+    </nav>
+    <div class="container">
+        <div class="page-header">
+            <h1 class="all-tittles">Bienvenidos al dashboard de Luz de amor <small>Gestion del sistema</small></h1>
+        </div>
+    </div>
 
-    <?php $jsPhotoNotes = $this->assets->collection('jsPhotoNotes'); ?>
-    <?php if (!empty($jsPhotoNotes)) { ?>
-        <?php echo $this->assets->outputJs('jsPhotoNotes'); ?>
-    <?php } ?>
-    <?php $jsMasonry = $this->assets->collection('jsMasonry'); ?>
-    <?php if (!empty($jsMasonry)) { ?>
-        <?php echo $this->assets->outputJs('jsMasonry'); ?>
-    <?php } ?>
-    <?php $jsGoogle = $this->assets->collection('jsGoogle'); ?>
-    <?php if (!empty($jsGoogle) && $this->router->getControllerName()=='process' && ($this->router->getActionName()=='activecourse' || $this->router->getActionName()=='edit')) { ?>
-        <script type="text/javascript" src='http://maps.google.com/maps/api/js?sensor=false&libraries=places'></script>
-        <?php echo $this->assets->outputJs('jsGoogle'); ?>
-    <?php } ?>
-    <?php $jsMorris = $this->assets->collection('jsMorris'); ?>
-    <?php if (!empty($jsMorris) && $this->router->getControllerName()=='process' && ($this->router->getActionName()=='statistics')) { ?>
-        <?php echo $this->assets->outputJs('jsMorris'); ?>
-    <?php } ?>
-    <?php $jsMorris = $this->assets->collection('jsMorris'); ?>
-    <?php if (!empty($jsMorris) && $this->router->getControllerName()=='process' && ($this->router->getActionName()=='statistics')) { ?>
-        <?php echo $this->assets->outputJs('jsMorris'); ?>
-    <?php } ?>
-    <?php $jsScroll = $this->assets->collection('jsScroll'); ?>
-    <?php if (!empty($jsScroll) && $this->router->getControllerName()=='client' && ($this->router->getActionName()=='control')) { ?>
-        <?php echo $this->assets->outputJs('jsScroll'); ?>
-    <?php } ?>
+    <div class="container-fluid"  style="margin: 50px 0;">
+        <?= $this->getContent() ?>
+    </div>
 
-    <script type="text/javascript">
-        /*$(function(){
-            setTimeout(function(){
-                pageLoadingFrame();
-            },900);
-        });*/
-    </script>
-</body
+</div>
+<script src="/dash/js/jquery.min.js"></script>
+<script src="/dash/js/jquery-1.11.2.min.js"></script>
+<script src="/dash/js/modernizr.js"></script>
+<script src="/dash/js/bootstrap.min.js"></script>
+<script src="/dash/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="/dash/js/main.js"></script>
+<script src="<?= $this->url->get('dash/js/formValidation.min.js')?>"></script>
+</body>
 </html>

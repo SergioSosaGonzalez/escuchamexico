@@ -9,4 +9,17 @@ class ControllerBase extends Controller
     {
     	return $a+$b;
     }
+
+    public function response($dataArray,$status)
+    {
+        $this->view->disable();
+        if($status==200){
+            $this->response->setStatusCode($status, "OK");
+        }else{
+            $this->response->setStatusCode($status, "ERROR");
+        }
+        $this->response->setJsonContent($dataArray);
+        $this->response->send();
+        exit();
+    }
 }

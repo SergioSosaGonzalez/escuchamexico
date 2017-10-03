@@ -1,6 +1,9 @@
 <?php
 namespace Modules\Dashboard\Controllers;
 use Modules\Models\CdUser;
+use Modules\Models\Users;
+use Phalcon\Http\Request;
+
 class LoginController extends \Phalcon\Mvc\Controller
 {
     public function initialize(){
@@ -8,11 +11,10 @@ class LoginController extends \Phalcon\Mvc\Controller
         $this->assets->collection('JsIndexLogin')
             ->setTargetPath("dash/js/login.min.js")
             ->setTargetUri("dash/js/login.min.js")
-            ->addJs("dash/js/plugins/jquery/jquery.min.js")
-            ->addJs("dash/js/plugins/bootstrapV/formValidation.min.js")
-            ->addJs("dash/js/plugins/bootstrapV/bootstrapV.min.js")
-            ->addJs("dash/js/plugins/bootstrapV/es_ES.js")
-            ->addJs("dash/js/login/login.js")
+            ->addJs("dash/js/jquery.min.js")
+            ->addJs("dash/js/formValidation.min.js")
+            ->addJs("dash/js/bootstrapV.min.js")
+            ->addJs("dash/js/es_ES.js")
             ->join(true)
             ->addFilter(new \Phalcon\Assets\Filters\Jsmin());
         $this->view->setLayout('login');
@@ -22,17 +24,37 @@ class LoginController extends \Phalcon\Mvc\Controller
         $session = $this->getSession();
         $this->view->setVar("key",$session["token"]);
     }
+    public function ajaxAction()
+    {
+        $request = new Request();
+        if(!($request->isPost() and $request->isAjax()))$this->response(array("menssage"=>"Error"),404);
+
+        $username = $request->getPost('username');
+        $password = $request->getPost('password');
+        $consulta = Users::findFirst("username='$username'");
+        if($consulta and $consulta->getPassword()== $password)
+        {
+            $this->_registerSession($consulta);
+            $this->session->remove("session");
+            $this->response(array("message"=>"SUCCESS","code"=>200),200);
+        }else{
+            $this->response(array("Message"=>"usurio o contraseña incorrecta",
+                "code"=> 200,
+                "usuario"=>$request->getPost("username"),
+                "password"=>$request->getPost("password")),200);
+        }
+    }
     public function sessionAction(){
         $session = $this->getSession();
         $key = $this->request->getPost("key");
         if($this->validate() && $session && hash_equals($key,$session["token"])){
             $request = $this->request;
             $user = new CdUser();
-            $email      = $request->getPost("email");
+            $username      = $request->getPost("username");
             $password   = $request->getPost("password");
-            $session = $user->findFirst("email='$email'");
+            $session = $user->findFirst("username='$username'");
             if(!$session){
-                $this->response(array("message"=>"ERROR","code"=>400,"notification"=>"email incorrect"),200);
+                $this->response(array("message"=>"ERROR","code"=>400,"notification"=>"username incorrect"),200);
             }
             else if($session->getStatus()=="ACTIVE"){
                 if($this->security->checkHash($password,$session->getPassword())){
@@ -54,9 +76,9 @@ class LoginController extends \Phalcon\Mvc\Controller
                 "uid" => $user->getUid(),
                 "username"=>$user->getUsername(),
                 "rol"=>$user->getRol(),
-                "name"=>$user->getName(),
-                "photo"=>$user->getPhoto(),
-                "email"=>$user->getEmail()
+                //"name"=>$user->getName(),
+                //"photo"=>$user->getPhoto(),
+                //"username"=>$user->getusername()
             )
         );
     }
