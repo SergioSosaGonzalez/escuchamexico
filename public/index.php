@@ -79,6 +79,11 @@ $di->set('router', function(){
         'controller' => 'login',
         'action' => 'logout',
     ));
+    $router->add("/agregarcomentario",array(
+        'module'=>'frontend',
+        'controller' => 'index',
+        'action' => 'comentarios',
+    ));
     $router->add("/dashboard",array(
         'module'=>'dashboard',
         'controller' => 'index',
@@ -96,6 +101,65 @@ $di->set('router', function(){
         'module'=>'frontend',
         'controller' => 'index',
         'action' => 'guardarpsicologos',
+    ));
+
+
+    $router->add("/dashboard/todos-psicologos", array(
+        'module'=>'dashboard',
+        'controller' => 'psicologos',
+        'action' => 'index',
+    ));
+
+    $router->add("/dashboard/comentarios-pendientes", array(
+        'module'=>'dashboard',
+        'controller' => 'commentary',
+        'action' => 'index',
+    ));
+
+
+    $router->add("/dashboard/psicologos-activos", array(
+        'module'=>'dashboard',
+        'controller' => 'psicologos',
+        'action' => 'activos',
+    ));
+
+    $router->add("/dashboard/psicologos-inactivos", array(
+        'module'=>'dashboard',
+        'controller' => 'psicologos',
+        'action' => 'inactivos',
+    ));
+
+    $router->add("/dashboard/comentarios-activos", array(
+        'module'=>'dashboard',
+        'controller' => 'commentary',
+        'action' => 'activos',
+    ));
+
+
+    $router->add('/([0-9-a-zA-Z\-]+)/([0-9-a-zA-Z\-]+)/([0-9-a-zA-Z\-]+)', array(
+        'module'=>'dashboard',
+        'controller'=>'1',
+        'action'=>'2'
+    ))->setName("controllers")->convert('action', function($action) {
+        return \Phalcon\Text::lower(\Phalcon\Text::camelize($action));
+    });
+
+    $router->add("/dashboard/todos-psicologos/cambiar-status", array(
+        'module'=>'dashboard',
+        'controller' => 'psicologos',
+        'action' => 'cambiostatus',
+    ));
+
+    $router->add("/dashboard/comentarios-pendientes/cambiar-status", array(
+        'module'=>'dashboard',
+        'controller' => 'commentary',
+        'action' => 'cambiostatus',
+    ));
+
+    $router->add("/dashboard/comentarios-pendientes/deletecomentary", array(
+        'module'=>'dashboard',
+        'controller' => 'commentary',
+        'action' => 'delete',
     ));
 
     return $router;

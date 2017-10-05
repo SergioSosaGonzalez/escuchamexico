@@ -67,7 +67,7 @@ $(document).ready(function(){
              data:$(this).serialize(),
              dataType:"json",
              success: function (resp) {
-                 alert("Datos guardados correctamente");
+                 swal("Sus datos fueron guardados correctamente");
                  $("input[name=cedula]").val("");
                  $("input[name=nombre]").val("");
                  $("input[name=apePaterno]").val("");
@@ -80,5 +80,45 @@ $(document).ready(function(){
              },complete:function (jqXHR,estado) {
              }
          });
+     });
+
+
+     $('#formComent').formValidation({
+         framework:'bootstrap',
+         icon: {
+             valid: 'glyphicon glyphicon-ok',
+             invalid: 'glyphicon glyphicon-remove',
+             validating: 'glyphicon glyphicon-refresh'
+         },fields:{
+             nombre:{
+                 validators:{
+                     notEmpty:{
+                         message:"Es necesario llenar este campo"
+                     }
+                 }
+             },
+             comentario:{
+                 validators:{
+                     notEmpty:{
+                         message:"Es necesario llenar este campo"
+
+                     }
+                 }
+             }
+         }
+     }).on('success.form.fv',function (e) {
+         e.preventDefault();
+         $.ajax({
+             url:"/agregarcomentario",
+             type:"post",
+             data: $(this).serialize(),
+             dataType:"json",
+             success: function (resp) {
+                 console.log(resp);
+                 swal("Sus datos fueron guardados correctamente");
+
+             }
+         })
+
      });
 })

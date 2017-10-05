@@ -1,3 +1,12 @@
+html {
+    min-height: 100%;
+    position: relative;
+}
+body {
+    margin: 0;
+    margin-bottom: 40px;
+}
+
 .fileinput-button {
     position: relative;
     display: inline-block;
@@ -31,4 +40,51 @@
 .boton_personalizado:hover{
     color: #1883ba;
     background-color: #ffffff;
+}
+
+footer {
+    background-color: rgb(164, 33, 229);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    color: white;
+}
+.comentarios{
+    width: 700px;
+    height:500px;
+    overflow-y: scroll;
+}
+.comentary{
+    background: #FCFCFC;
+    padding: 10px 12px;
+    border-bottom: 1px solid #E5E5E5;
+    overflow: hidden;
+    -webkit-border-radius: 4px 4px 0 0;
+    -moz-border-radius: 4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
+}
+.by-author{
+    color:#03658c;
+}
+.by-author:after{
+content: 'autor';
+background: #03658c;
+color: #FFF;
+font-size: 12px;
+padding: 3px 5px;
+font-weight: 700;
+margin-left: 10px;
+-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+border-radius: 3px;
+}
+.comment-content{
+background: #FFF;
+padding: 12px;
+font-size: 15px;
+color: #595959;
+-webkit-border-radius: 0 0 4px 4px;
+-moz-border-radius: 0 0 4px 4px;
+border-radius: 0 0 4px 4px;
 }

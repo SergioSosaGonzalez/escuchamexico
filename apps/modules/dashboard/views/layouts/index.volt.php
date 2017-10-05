@@ -11,7 +11,8 @@
     <link href="<?=$this->url->get('dash/css/normalize.css')?>" rel="stylesheet" type="text/css" >
     <link href="<?=$this->url->get('dash/css/jquery.mCustomScrollbar.css')?>" rel="stylesheet" type="text/css" >
     <link href="<?=$this->url->get('dash/css/style.css')?>" rel="stylesheet" type="text/css" >
-
+    <link href="<?=$this->url->get('dash/css/jquery.dataTables.css')?>" rel="stylesheet" type="text/css" >
+    <link href="<?=$this->url->get('dash/css/sweetalert.css')?>" rel="stylesheet" type="text/css" >
 
 </head>
 <body>
@@ -34,9 +35,9 @@
                 <li>
                     <div class="dropdown-menu-button"><i class="fa fa-user-md"></i>&nbsp;&nbsp; Psicologos <i class="zmdi zmdi-chevron-down pull-right zmdi-hc-fw"></i></div>
                     <ul class="list-unstyled">
-                        <li><a href="institution.html"><i class="fa fa-list"></i>&nbsp;&nbsp; Lista de candidatos</a></li>
-                        <li><a href="provider.html"><i class="fa fa-thumbs-up" ></i>&nbsp;&nbsp; Activos</a></li>
-                        <li><a href="category.html"><i class="fa fa-thumbs-down"></i>&nbsp;&nbsp; Inactivos</a></li>
+                        <li><a href="<?=$this->url->get('dashboard/todos-psicologos')?>"><i class="fa fa-list"></i>&nbsp;&nbsp; Lista de candidatos</a></li>
+                        <li><a href="<?=$this->url->get('dashboard/psicologos-activos')?>"><i class="fa fa-thumbs-up" ></i>&nbsp;&nbsp; Activos</a></li>
+                        <li><a href="<?=$this->url->get('dashboard/psicologos-inactivos')?>"><i class="fa fa-thumbs-down"></i>&nbsp;&nbsp; Inactivos</a></li>
                     </ul>
                 </li>
                 <li>
@@ -49,8 +50,8 @@
                 <li>
                     <div class="dropdown-menu-button"><i class="fa fa-comments"></i>&nbsp;&nbsp; Comentarios <i class="zmdi zmdi-chevron-down pull-right zmdi-hc-fw"></i></div>
                     <ul class="list-unstyled">
-                        <li><a href="book.html"><i class="fa fa-thumbs-up"></i>&nbsp;&nbsp;Autorizados</a></li>
-                        <li><a href="catalog.html"><i class="fa fa-thumbs-down" ></i>&nbsp;&nbsp; Rechazados</a></li>
+                        <li><a href="/dashboard/comentarios-pendientes"><i class="fa fa-list"></i>&nbsp;Pendientes a autorizar</a></li>
+                        <li><a href="/dashboard/comentarios-activos"><i class="fa fa-thumbs-up"></i>&nbsp;Autorizados</a></li>
                     </ul>
                 </li>
              </ul>
@@ -66,18 +67,13 @@
             <li style="color:#fff; cursor:default;">
                 <span class="all-tittles">Admin Name</span>
             </li>
-            <li  class="tooltips-general exit-system-button" data-href="/dashboard/logout" data-placement="bottom" title="Salir del sistema">
+            <li  class="tooltips-general exit-system-button" data-href="/logout" data-placement="bottom" title="Salir del sistema">
                 <i class="zmdi zmdi-power"></i>
             </li>
-            <li  class="tooltips-general search-book-button" data-href="searchbook.html" data-placement="bottom" title="Buscar libro">
-                <i class="zmdi zmdi-search"></i>
+            <li  class="tooltips-general" data-href="/logout" data-placement="bottom" title="Cambiar contraseña">
+                <i class="fa fa-key"></i>
             </li>
-            <li  class="tooltips-general btn-help" data-placement="bottom" title="Ayuda">
-                <i class="zmdi zmdi-help-outline zmdi-hc-fw"></i>
-            </li>
-            <li class="mobile-menu-button visible-xs" style="float: left !important;">
-                <i class="zmdi zmdi-menu"></i>
-            </li>
+
         </ul>
     </nav>
     <div class="container">
@@ -93,10 +89,14 @@
 </div>
 <script src="/dash/js/jquery.min.js"></script>
 <script src="/dash/js/jquery-1.11.2.min.js"></script>
+<script src="/dash/js/jquery.dataTables.js"></script>
 <script src="/dash/js/modernizr.js"></script>
 <script src="/dash/js/bootstrap.min.js"></script>
+<script src="/dash/js/dashboardAction.js"></script>
 <script src="/dash/js/jquery.mCustomScrollbar.concat.min.js"></script>
 <script src="/dash/js/main.js"></script>
+<script src="<?= $this->url->get('dash/js/sweetalert.min.js')?>"></script>
 <script src="<?= $this->url->get('dash/js/formValidation.min.js')?>"></script>
+<script src="<?=$this->url->get('dash/js/bootstrapV.min.js')?>"></script>
 </body>
 </html>

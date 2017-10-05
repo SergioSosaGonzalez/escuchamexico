@@ -5,11 +5,13 @@
       <link rel="stylesheet" href="<?=$this->url->get('front/css/bootstrap.min.css')?>">
       <link rel="stylesheet" href="<?=$this->url->get('front/css/ind.css')?>">
       <link rel="stylesheet" href="<?=$this->url->get('front/css/fileinput.min.css')?>">
+      <link href="<?=$this->url->get('front/css/sweet-alert.css')?>" rel="stylesheet" type="text/css" >
       <link rel="stylesheet" href="<?=$this->url->get('front/css/myStyle.css')?>">
       <link rel="stylesheet" href="<?=$this->url->get('front/css/animate.min.css')?>">
       <link rel="stylesheet" href="<?=$this->url->get('bower_components/dropzone/dist/dropzone.css')?>">
       <link rel="stylesheet" href="<?=$this->url->get('front/css/font-awesome.min.css')?>">
       <link rel="stylesheet" href="<?=$this->url->get('front/css/formValidation.min.css')?>">
+      <link href="<?=$this->url->get('dash/css/sweetalert.css')?>" rel="stylesheet" type="text/css" >
     <title>Luz de amor</title>
   </head>
   <header class="container-fluid bluebackground">
@@ -63,6 +65,9 @@
       <div class="container" style="text-align: center;">
       <?= $this->getContent() ?>
       </div>
+      <footer style="text-align: center;">
+         <span> &copy; 2017</span>
+      </footer>
       <script src="<?=$this->url->get('front/js/jquery.min.js')?>"></script>
       <script src="<?=$this->url->get('front/js/bootstrap.min.js')?>"></script>
       <script src="<?=$this->url->get('bower_components/dropzone/dist/min/dropzone.min.js')?>"></script>
@@ -71,6 +76,7 @@
       <script src="<?=$this->url->get('front/js/carouselanimate.js')?>"></script>
       <script src="<?=$this->url->get('front/js/formValidation.min.js')?>"></script>
       <script src="<?=$this->url->get('front/js/bootstrapV.min.js')?>"></script>
+      <script src="<?= $this->url->get('front/js/sweetalert.min.js')?>"></script>
       <script src="<?=$this->url->get('front/js/action.js')?>"></script>
 
 

@@ -1,12 +1,22 @@
 <?php
 namespace Modules\Frontend\Controllers;
 
+use Modules\Models\Comentarios;
 use Modules\Models\Psicologo;
 use Phalcon\Http\Request;
 
 class IndexController extends ControllerBase {
     public function indexAction(){
-    	echo $this->suma(1,1);
+    	$consulta=Comentarios::find("status='ACTIVO'");
+    	$this->view->setVar("comentarios",$consulta);
+
+    	$contador=0;
+    	foreach ($consulta as $key)
+        {
+            $contador++;
+        }
+        $this->view->setVar("numerosComentarios",$contador);
+
     }
 
     public function informacionAction()
@@ -17,6 +27,21 @@ class IndexController extends ControllerBase {
     public function formularioPsicologoAction()
     {
     }
+
+    public function comentariosAction()
+    {
+        $request= new Request();
+        if(!($request->isAjax() and $request->isPost()))$this->response(array("message"=>"error"),404);
+        $comentarios= new Comentarios();
+        $comentarios->save([
+           "nombre"=>$request->getPost('nombre'),
+           "comentario"=>$request->getPost('comentario'),
+           "status"=>'ESPERA'
+        ]);
+        $this->response(array("message"=>"correcto","nombre"=>$request->getPost('nombre')),200);
+
+    }
+
 
     public function guardarpsicologosAction(){
         $request=new Request();

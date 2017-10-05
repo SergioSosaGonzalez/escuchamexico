@@ -43,6 +43,8 @@ class Security extends Plugin {
             $adminResources = array(
                 "user"=>array("deleteuser","newuser","index","saveuser","edit","inactive","activity"),
                 "reports"=>array("index","general","generatetwo","generatethree","generatefour","downloadxlsgeneral","downloadxlsuser","downloadxlsresults","reportschool","downloadxlsresultsschools","downloadxlsgeneralschool","downloadxlsschoolsemester","downloadxlslastresult"),
+                "psicologos"=>array("index","cambiostatus","activos","inactivos"),
+                "commentary"=>array("index","cambiostatus","delete","activos")
             );
             foreach($adminResources as $resource => $actions){
                 $acl->addResource(new \Phalcon\Acl\Resource($resource),$actions);
